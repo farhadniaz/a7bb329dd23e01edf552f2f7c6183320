@@ -1,8 +1,13 @@
 import actions, { Actions } from "./actions";
-import appInitialState, { IHotelReservation } from "./initialState";
-import { IAction } from "../../types/store";
+import appInitialState from "./initialState";
+import { IAction, IHotelState } from "../../types/store";
+import { IHotelReservation } from "../../types/hotel";
 
 export type Action = IAction<Actions, IHotelReservation | number>;
+
+const updateLocalStorage = (state: IHotelState) => {
+  localStorage.setItem("hotelState", JSON.stringify(state));
+};
 
 export default function reducer(state = appInitialState, action: Action) {
   const newState = { ...state };
@@ -12,9 +17,11 @@ export default function reducer(state = appInitialState, action: Action) {
         ...newState.data,
         ...(action.payload as IHotelReservation),
       };
+      updateLocalStorage(newState);
       return newState;
     case actions.SET_STEP:
       newState.currentStep = action.payload as number;
+      updateLocalStorage(newState);
       return newState;
 
     default:

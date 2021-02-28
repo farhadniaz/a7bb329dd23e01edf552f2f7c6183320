@@ -1,29 +1,25 @@
-export interface IpaymentCard {
-  name?: string;
-  number?: number;
-  expiration?: Date;
-  CVV?: number;
-}
+import { IHotelState } from "../.././types/store";
+const readStateFromLocalStorage = () => {
+  const hotelStateRawFromLocalStorage = localStorage.getItem("hotelState");
 
-export interface IHotelReservation {
-  hotelName?: string;
-  enterDate?: Date;
-  exitDate?: Date;
-  adults?: number;
-  children?: number;
-  roomType?: string;
-  couponCode?: string;
-  paymentCard?: IpaymentCard;
-}
+  const hotelStateFromLocalStorage: IHotelState =
+    hotelStateRawFromLocalStorage && JSON.parse(hotelStateRawFromLocalStorage);
 
-export interface IState {
-  currentStep?: number;
-  data?: IHotelReservation;
-}
-const state: IState = {
+  if (hotelStateFromLocalStorage?.data) {
+    const { end_date, start_date } = hotelStateFromLocalStorage.data;
+    if (end_date) {
+      hotelStateFromLocalStorage.data.end_date = new Date(end_date);
+    }
+    if (start_date) {
+      hotelStateFromLocalStorage.data.start_date = new Date(start_date);
+    }
+  }
+  return hotelStateFromLocalStorage;
+};
+
+const state: IHotelState = readStateFromLocalStorage() || {
   currentStep: 1,
-  data: undefined
-  
+  data: undefined,
 };
 
 export default state;

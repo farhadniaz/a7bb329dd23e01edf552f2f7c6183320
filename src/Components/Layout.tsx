@@ -2,17 +2,30 @@ import { FC, createContext, useContext } from "react";
 import styled, { createGlobalStyle } from "styled-components";
 // @ts-ignore
 import ModernCssReset from "modern-css-reset";
-
 export const GlobalStyle = createGlobalStyle`
 ${ModernCssReset}
 `;
+
+interface IContainerProps {
+    gutter?: number;
+    style?: object;
+    fluid?: boolean;
+}
+interface IColProps {
+    span: number;
+    sm?: number;
+    md?: number;
+    lg?: number;
+    xlg?: number;
+}
+
 
 const ContainerShiled = styled.div`${(props) => {
     return `
     margin: auto;
     display: flex;
     flex-wrap: wrap;
-    width:95%;
+    width: ${(props:IContainerProps) => props.fluid ? "100%" : "90%"};
     @media (min-width:1200px) {
         max-width:1200px;
     }
@@ -20,28 +33,18 @@ const ContainerShiled = styled.div`${(props) => {
 
 }}`;
 
-interface IContainerProps {
-    gutter?: number;
-}
+
 const defaultGutter = 12;
 const ContainerContext = createContext(defaultGutter);
 export const Container: FC<IContainerProps> = (props) => {
-    const { gutter = defaultGutter, children } = props;
+    const { gutter = defaultGutter, children, style = {}, fluid = false } = props;
     const { Provider } = ContainerContext;
-    return <Provider value={gutter}>
-        <ContainerShiled>
+    return <Provider value={gutter} >
+        <ContainerShiled style={style}>
             {children}
         </ContainerShiled>
     </Provider>
 
-}
-
-interface IColProps {
-    span: number;
-    sm?: number;
-    md?: number;
-    lg?: number;
-    xlg?: number;
 }
 
 export const Col = styled.div`${(props: IColProps) => {

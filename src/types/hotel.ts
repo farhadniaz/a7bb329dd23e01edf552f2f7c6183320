@@ -29,15 +29,19 @@ export interface IHotelDetails {
   room_scenic: Roomscenic[];
 }
 
-export interface IpaymentCard {
+export interface IPaymentCard {
   name?: string;
   number?: number;
-  expiration?: Date;
+  expirationMonth?: number;
+  expirationYear?: number;
   CVV?: number;
 }
+export type IPaymentCardSolid = {
+  [K in keyof IPaymentCard]-?: IPaymentCard[K] | undefined;
+};
 
 export interface IHotelReservation {
-  hotel_id: string;
+  hotel_id?: string;
   hotelName?: string;
   hotelDetails?: IHotelDetails;
   start_date?: Date;
@@ -46,9 +50,14 @@ export interface IHotelReservation {
   child?: number;
   room_type?: number;
   room_scenic?: number;
-  couponCode?: string;
-  paymentCard?: IpaymentCard;
+  couponCode?: ICoupon;
+  paymentCard?: IPaymentCard;
+  created?: boolean;
 }
+
+export type HotelReservationSolid = {
+  [K in keyof IHotelReservation]-?: IHotelReservation[K] | undefined;
+};
 
 export interface IHotelRegisterPayload {
   hotel_id: number;
@@ -65,4 +74,11 @@ export interface IHotelRegisterPayload {
   card_date_month: string;
   card_date_year: string;
   card_cvv: string;
+}
+
+export interface ICoupon {
+  id: string;
+  code: string;
+  discount_ammount: number;
+  expiration_at: string;
 }

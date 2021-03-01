@@ -1,8 +1,8 @@
 import { FC } from "react";
 import styled from "styled-components";
-
-import { gray, grayAlpha, grayBolka, grayMazo } from "../../styles/colors";
-import { GrFormPrevious } from 'react-icons/gr';
+import Button from "../Common/Button";
+import { gray } from "../../styles/colors";
+import { AiOutlineDoubleLeft } from 'react-icons/ai';
 
 const Wrapper = styled.section`
 background:${gray};
@@ -27,13 +27,17 @@ background:${gray};
 interface IProps {
     onForward: () => void;
     onBack?: () => void;
+    forwardText?: string;
+    backText?: string;
 }
 
 const Steper: FC<IProps> = (props) => {
-    const { onForward, onBack } = props;
+    const { onForward, forwardText = "Kaydet ve Devm Et", onBack, backText = "Geri" } = props;
     return <Wrapper className="step-bar">
-        {onBack && <button onClick={onBack} className="step-bar__back"><GrFormPrevious /><GrFormPrevious />Geri</button>}
-        {onForward && <button onClick={onForward} className="step-bar__forward">Kaydet ve Devm Et</button>}
+        {onBack &&
+            <Button onClick={onBack} kind="primary" className="step-bar__back"
+                icon={<AiOutlineDoubleLeft />}>{backText}</Button>}
+        {onForward && <Button kind="primary" onClick={onForward} className="step-bar__forward">{forwardText}</Button>}
 
     </Wrapper>
 }

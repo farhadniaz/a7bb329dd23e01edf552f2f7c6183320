@@ -10,12 +10,17 @@ interface IProps {
 }
 const FiledValidationError: FC<IProps> = props => {
   let { message, error } = props;
+  console.log(error);
   let defaultMessage;
   // @ts-ignore
   switch (error?.type) {
     case "required":
       defaultMessage = "This filed is required!";
       break;
+    case "minLength":
+      defaultMessage = "Pleas check filed length!";
+      break;
+
     default:
       defaultMessage = "";
       break;

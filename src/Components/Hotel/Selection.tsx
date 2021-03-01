@@ -1,5 +1,4 @@
 import { useSelector, RootStateOrAny } from "react-redux";
-
 import StepBar from "./StepBar"
 import ConfirmPayment from "./Steps/ConfirmPayment";
 import HotelDate from "./Steps/HotelDate";
@@ -16,16 +15,16 @@ const StepComponenet = () => {
         case 2:
             return <HotelRoomViewType />;
         case 3:
-            return <ReservationComplete />;
-        case 4:
             return <ConfirmPayment />;
+        case 4:
+            return <ReservationComplete />;
         default:
             return <HotelDate />;
     }
 }
 
 const Selection = () => {
-    return <Container>
+    return <Container fluid>
         <Col span={12}>
             <StepBar />
         </Col>

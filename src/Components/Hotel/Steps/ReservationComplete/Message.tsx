@@ -38,10 +38,6 @@ button {
 }
 
     
-
-
-
-
 @media ${medias.md}{
 
     
@@ -62,7 +58,8 @@ const ReservationCompleteMessage = () => {
     const hotelData = useSelector((state: RootStateOrAny) => state.Hotel.data) as HotelReservationSolid;
 
     const cancel = () => {
-        if (hotelData.created) {
+
+        if (hotelData.created && window.confirm("Press a button!")) {
             cancelBookedHotel(hotelData.hotel_id).then(res => {
                 restHotelState();
             }).catch(err => {
@@ -88,7 +85,6 @@ const ReservationCompleteMessage = () => {
             <Button kind="primary" onClick={() => setHotelStep(1)}>Rezervasyonu Guncelle</Button>
             <Button kind="primary" onClick={() => cancel()}>Rezervasyon Iptal Et</Button>
         </div>
-
     </Wrapper>
 }
 

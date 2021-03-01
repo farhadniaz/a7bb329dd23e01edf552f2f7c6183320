@@ -10,7 +10,6 @@ interface IProps {
 }
 const FiledValidationError: FC<IProps> = props => {
   let { message, error } = props;
-  console.log(error);
   let defaultMessage;
   // @ts-ignore
   switch (error?.type) {

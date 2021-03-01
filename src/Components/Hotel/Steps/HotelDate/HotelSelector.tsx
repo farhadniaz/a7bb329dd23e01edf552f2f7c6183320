@@ -15,6 +15,7 @@ const HotelSelector: FC<IHotelSelector> = (props) => {
         }}
         placeholder="Rezervasyon yapmalistediginiz otel seciniz."
     >
+        <option selected disabled>Rezervasyon yapmalistediginiz otel seciniz.</option>
         {(data || []).map(hotel => <option value={hotel.id}>{hotel.hotel_name}</option>)}
     </select>
 }

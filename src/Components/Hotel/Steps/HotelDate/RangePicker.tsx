@@ -52,9 +52,9 @@ const RangePicker: FC<IRangePickerProps> = (props) => {
                         placeholderText="  /  / "
                         selected={end_date}
                         onChange={(date) => onChange(date as Date)}
-                        selectsStart
-                        startDate={end_date}
-                        endDate={start_date}
+                        selectsEnd
+                        startDate={start_date}
+                        endDate={end_date}
                         id="start-date"
                     />
                     }

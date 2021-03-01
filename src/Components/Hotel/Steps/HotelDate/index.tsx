@@ -56,7 +56,7 @@ const HotelDate = () => {
 
     const applyData = (data: IHotelReservation) => {
 
-
+       
         setHotelReservationData({
             ...data,
             hotelName,
@@ -97,6 +97,7 @@ const HotelDate = () => {
                         control={control}
                         as={<select id="adult"
                         >
+                            <option selected disabled>Yetişkin</option>
                             {Array(hotelDetail?.adult || 6)
                                 .fill(1)
                                 .map((item, index) => <option value={index} key={index}>{index}</option>)}
@@ -113,14 +114,18 @@ const HotelDate = () => {
                         as={<select id="child"
                             disabled={childStatus == null ? true : !hotelDetail?.child_status}
                         >
+                            <option selected disabled>Çocuk</option>
                             {Array(6).fill(1).map((item, index) => <option value={index} key={index}>{index}</option>)}
                         </select>}
                     />
-                    {childStatus == null ? null : !childStatus && <span>Çocuk ziyaretçi kabul edilmiyor!</span>}
+                    {childStatus == null ? null : childStatus ? <span>çocuk kabul dur</span> : <span>Çocuk ziyaretçi kabul edilmiyor!</span>}
                 </div>
             </div>
         </Wrapper>
-        <Steper onForward={submit} />
+        <Steper onForward={submit}
+
+            forwardText={hotelData?.created ? "Güncelle ve Devm Et" : undefined}
+        />
     </>
 }
 

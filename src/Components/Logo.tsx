@@ -13,7 +13,7 @@ height: 300px;
 const Logo = () => {
     return <Wrapper className="Logo">
         <Link to={pageLinks.home} className="Logo__link">
-            <img src={process.env.PUBLIC_URL + '/teknasyon-logo.png'} />
+            <img src={process.env.PUBLIC_URL + '/logo.png'} />
         </Link>
     </Wrapper>
 }

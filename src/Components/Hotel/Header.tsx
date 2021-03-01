@@ -1,6 +1,6 @@
 import styled from "styled-components";
 import { useResetHotelState } from "../../store/hotel/actions";
-import Button from "../Common/Button";
+import Button from "../../Components/Common/Button";
 import { Col, Container } from "../Layout"
 import { blue } from "../../styles/colors";
 

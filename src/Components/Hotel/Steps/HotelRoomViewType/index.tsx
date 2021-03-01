@@ -3,6 +3,7 @@ import styled from "styled-components";
 import RoomType from "./RoomType";
 import RoomView from "./RoomScenic";
 import HotelInfo from "./HotelInfo";
+import { getDateDiffInDay } from "../../../../utils";
 import { IHotelReservation } from "../../../../types/hotel";
 import { useSetHotelReservationData, useSetHotelStep } from "../../../../store/hotel/actions";
 import Steper from "../../Steper"
@@ -10,7 +11,16 @@ import { useForm, Controller } from "react-hook-form"
 import { Col, Container } from "../../../Layout";
 import FiledValidationError from "../../../Common/FiledValidationError";
 const Wrapper = styled.section`
-
+.hotel-info {
+    margin-bottom: 24px;
+}
+.line {
+    height: 2px;
+    width: 100%;
+    background: #f2f2f2;
+    display: block;
+    margin: 10px 0;
+}
 `;
 const HotelRoomViewType = () => {
     const hotelData = useSelector((state: RootStateOrAny) => state.Hotel.data) as IHotelReservation;
@@ -29,11 +39,8 @@ const HotelRoomViewType = () => {
         setHotelStep(3);
     }, () => {
     })
-
     //  @ts-ignore
-    const Difference_In_Time = hotelData.end_date.getTime() - hotelData.start_date.getTime();
-    const Difference_In_Days = Math.ceil(Difference_In_Time / (1000 * 3600 * 24));
-
+    const Difference_In_Days = getDateDiffInDay(hotelData.start_date, hotelData.end_date);
 
     return <Wrapper className="">
         <HotelInfo />
@@ -42,6 +49,7 @@ const HotelRoomViewType = () => {
 
             <Col span={12}>
                 Oda Tipi Seçimi  <FiledValidationError message="Please Select an item" error={errors.room_type} />
+                <span className="line"></span>
             </Col>
             <Controller
                 control={control}
@@ -49,7 +57,7 @@ const HotelRoomViewType = () => {
                     return <>
                         {hotelData.hotelDetails?.room_type.map(item => {
 
-                            return <Col key={item.id} span={4}>
+                            return <Col key={item.id} span={6} md={4} sm={12} >
                                 <RoomType data={item} days={Difference_In_Days} onChange={(e: any) => {
                                     onChange(e.target.value);
                                 }}
@@ -63,30 +71,35 @@ const HotelRoomViewType = () => {
 
         </Container>
 
-        <Container>
+        <Container fluid>
             <Col span={12}>
                 Manzara Seçimi  <FiledValidationError message="Please Select an item" error={errors.room_scenic} />
+                <span className="line"></span>
             </Col>
             <Controller
                 control={control}
                 render={({ onChange, value }) => {
                     return <>
                         {hotelData.hotelDetails?.room_scenic.map(item => {
-                            return <Col key={item.id} span={4}> <RoomView key={item.id} data={item}
-                                onChange={(e: any) => {
-                                    onChange(e.target.value);
-                                }}
-                                selectedId={value}
-                            /></Col>
+                            return <Col key={item.id} span={6} md={4} sm={12}>
+                                <RoomView key={item.id} data={item}
+                                    onChange={(e: any) => {
+                                        onChange(e.target.value);
+                                    }}
+                                    selectedId={value}
+                                /></Col>
                         })} </>
                 }}
                 name="room_scenic"
                 rules={{ required: true }}
             />
         </Container>
-        <Steper onForward={submit} onBack={() => {
-            setHotelStep(1)
-        }} />
+        <Steper
+            forwardText={hotelData?.created ? "Güncelle ve Devm Et" : undefined}
+            onForward={submit}
+            onBack={() => {
+                setHotelStep(1)
+            }} />
     </Wrapper>
 }
 

@@ -1,26 +1,41 @@
 import { useSelector, RootStateOrAny } from "react-redux";
 import styled from "styled-components";
-import RoomType from "./RoomType";
-import RoomView from "./RoomScenic";
-import { IHotelReservation, IHotelDetails } from "../../../../types/hotel";
-import { useSetHotelReservationData, useSetHotelStep } from "../../../../store/hotel/actions";
-import Steper from "../../Steper"
+import { IHotelReservation } from "../../../../types/hotel";
+
 const Wrapper = styled.section`
+
+    background: #f2f2f2;
+    padding: 16px;
+    border-radius: 8px;
+
+
+
+
+span {
+    font-weight: bold;
+}
+
+ h1 {
+    margin-bottom: 8px;
+    span {
+        font-weight: normal;
+        font-size: 14px;
+    }
+}
+
+ 
 
 `;
 const HotelInfo = () => {
     const hotelData = useSelector((state: RootStateOrAny) => state.Hotel.data) as IHotelReservation;
 
-    return <Wrapper className="">
-        {hotelData.hotelName}
-        ({hotelData?.hotelDetails?.city})
+    return <Wrapper className="hotel-info">
+        <h1>{hotelData.hotelName} <span>({hotelData?.hotelDetails?.city})</span></h1>
 
-        Giriş Tarihi: {hotelData?.start_date?.toLocaleDateString()} -
-        Çıkış Tarihi: {hotelData?.end_date?.toLocaleDateString()} -
-        Yetişkin: {hotelData?.adult}
-        {hotelData?.child && <> -
-        Çocuk:   {hotelData?.child}  </>}
-
+        <span>Giriş Tarihi:</span> {hotelData?.start_date?.toLocaleDateString()}{" - "}
+        <span>Çıkış Tarihi:</span> {hotelData?.end_date?.toLocaleDateString()}{" - "}
+        <span>Yetişkin:</span> {hotelData?.adult}{" - "}
+        <span>Çocuk:</span> {hotelData?.child || 0}
 
     </Wrapper>
 }

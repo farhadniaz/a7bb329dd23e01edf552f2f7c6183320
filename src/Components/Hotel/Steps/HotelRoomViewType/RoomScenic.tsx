@@ -1,20 +1,9 @@
 
 import styled from "styled-components";
 import { Roomscenic } from "../../../../types/hotel";
+import CardStyle from "./CardStyle";
 const Wrapper = styled.label`
-
-    padding: 24px;
-    border: 1px solid #ccc;
-    border-radius: 16px;
-    margin: 8px;
-    margin-bottom: 16px;
-    display: block;
-    input[type="radio"] {
-        display: none;
-    }
-    &.selected {
-        border-color: red;
-    }
+${CardStyle}
 `;
 interface IProps {
     data: Roomscenic;
@@ -23,11 +12,19 @@ interface IProps {
 }
 const RoomScenic = (props: IProps) => {
     const { data, selectedId, onChange } = props;
-    return <Wrapper className={`${selectedId == data.id ? "selected" : ''} `}>
+    return <Wrapper className={`card ${selectedId == data.id ? "selected" : ''} `}>
         <input type="radio" name="room_scenic" value={data.id} onChange={onChange} />
-        {data.title}
-        <img src={data.photo} />
-        Fiyat Etki Oranı    +{data.price_rate}%
+        <span className="card__title">{data.title}</span>
+        <figure>
+            <img src={data.photo}
+                alt={data.title} />
+            <figcaption>{data.title}</figcaption>
+        </figure>
+
+        <div className="card__sub-info">
+            <span>Fiyat Etki Oranı</span>
+            <span className="card__sub-info__value">+{data.price_rate}%</span>
+        </div>
     </Wrapper>
 }
 

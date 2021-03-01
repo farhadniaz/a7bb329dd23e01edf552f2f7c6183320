@@ -1,19 +1,9 @@
 import styled from "styled-components";
 import { Roomtype } from "../../../../types/hotel";
+import CardStyle from "./CardStyle";
 const Wrapper = styled.label`
-padding: 24px;
-border: 1px solid #ccc;
-border-radius: 16px;
-margin: 8px;
-margin-bottom: 16px;
-display: block;
-input[type="radio"] {
-    display: none;
-}
+${CardStyle}
 
-&.selected {
-    border-color: red;
-}
 `;
 
 interface IProps {
@@ -25,13 +15,17 @@ interface IProps {
 
 const RoomType = (props: IProps) => {
     const { data, days, onChange, selectedId } = props;
-    return <Wrapper className={`${selectedId == data.id ? "selected" : ''} `}>
+    return <Wrapper className={`card ${selectedId == data.id ? "selected" : ''} `}>
         <input type="radio" name="room_type" value={data.id} onChange={onChange} />
-        <span>{data.title}</span>
-        <img src={data.photo} />
-        <div>
-            <span>{days}<br />1 Yetişkin</span>
-            <span>{Number((data.price).toFixed(1)).toLocaleString()} TL</span>
+        <span className="card__title" >{data.title}</span>
+        <figure>
+            <img src={data.photo} 
+                alt={data.title} />
+            <figcaption>{data.description}</figcaption>
+        </figure>
+        <div className="card__sub-info" >
+            <span>{days} Gün<br />1 Yetişkin</span>
+            <span className="card__sub-info__value">{Number((data.price).toFixed(1)).toLocaleString()} TL</span>
         </div>
     </Wrapper>
 }

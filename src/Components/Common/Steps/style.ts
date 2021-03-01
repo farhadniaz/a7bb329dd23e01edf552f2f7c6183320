@@ -1,14 +1,15 @@
 import styled from "styled-components";
-
+import { medias } from "../../Layout";
 export const Wrapper = styled.section`
   display: flex;
+  text-align: center;
   .steps {
     &__item {
       flex: 1;
       display: inline-block;
       position: relative;
       &.passed:after {
-        background: #ac2020;
+        // background: #ac2020;
       }
       &.passed .steps__item__info,
       &.current .steps__item__info {
@@ -19,10 +20,21 @@ export const Wrapper = styled.section`
       &.current .steps__item__icon {
         border-color: black;
       }
+
+      &:first-child .steps__item__title,
+      &:first-child {
+        text-align: left;
+      }
+
+      .steps__item__title {
+        text-align: center;
+      }
+
+      &:last-child .steps__item__title,
       &:last-child {
-        flex: none;
         text-align: right;
       }
+
       &__info {
         position: relative;
         z-index: 2;
@@ -55,6 +67,14 @@ export const Wrapper = styled.section`
         top: 38px;
         z-index: 1;
       }
+    }
+  }
+  .steps__item .steps__item__title {
+    display: none;
+  }
+  @media ${medias.md} {
+    .steps__item .steps__item__title {
+      display: block;
     }
   }
 `;

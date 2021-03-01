@@ -124,7 +124,7 @@ const HotelDate = () => {
         </Wrapper>
         <Steper onForward={submit}
 
-            forwardText={hotelData?.created ? "Güncelle ve Devm Et" : undefined}
+            forwardText={hotelData?.reservedId ? "Güncelle ve Devm Et" : undefined}
         />
     </>
 }

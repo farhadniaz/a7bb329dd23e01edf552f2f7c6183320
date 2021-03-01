@@ -3,7 +3,7 @@ import { useForm } from "react-hook-form";
 import { useSelector, RootStateOrAny } from "react-redux";
 import { useSetHotelReservationData, useSetHotelStep } from "../../../../store/hotel/actions";
 import { IPaymentCardSolid, IPaymentCard, HotelReservationSolid } from "../../../../types/hotel";
-import { bookHotel } from "../../../../services/hotel"
+import { bookHotel, updateBookedHotel } from "../../../../services/hotel"
 import Info from "./Info";
 import CreditCard from "./CreditCard";
 import Steper from "../../Steper"
@@ -53,9 +53,17 @@ const ConfirmPayment = () => {
             room_type: hotelData.room_type,
         }
 
-        bookHotel(payload).then(data => {
+        let TakedAction;
+        if (hotelData.reservedId) {
+            TakedAction = updateBookedHotel(payload, hotelData.reservedId + '');
+        } else {
+            TakedAction = bookHotel(payload);
+        }
+
+
+        TakedAction.then(data => {
             setHotelReservationData({
-                created: true
+                reservedId: data.id
             });
             setHotelStep(4);
         }).catch(err => {

@@ -50,12 +50,12 @@ const ReservationCompleteMessage = () => {
     const hotelData = useSelector((state: RootStateOrAny) => state.Hotel.data) as HotelReservationSolid;
 
     const cancel = () => {
-        if (hotelData.created && window.confirm("Rezervasyon kaydınızı iptal etmek istediğinize emin misiniz?")) {
-            cancelBookedHotel(hotelData.hotel_id).then(res => {
+        if (hotelData.reservedId && window.confirm("Rezervasyon kaydınızı iptal etmek istediğinize emin misiniz?")) {
+            cancelBookedHotel(hotelData.reservedId+'').then(res => {
                 restHotelState();
             }).catch(err => {
                 console.log(err);
-                alert("error ")
+                alert("error ") 
             })
         }
     }

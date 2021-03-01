@@ -95,7 +95,7 @@ const HotelRoomViewType = () => {
             />
         </Container>
         <Steper
-            forwardText={hotelData?.created ? "Güncelle ve Devm Et" : undefined}
+            forwardText={hotelData?.reservedId ? "Güncelle ve Devm Et" : undefined}
             onForward={submit}
             onBack={() => {
                 setHotelStep(1)

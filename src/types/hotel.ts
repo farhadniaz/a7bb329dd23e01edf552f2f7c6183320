@@ -52,7 +52,7 @@ export interface IHotelReservation {
   room_scenic?: number;
   couponCode?: ICoupon;
   paymentCard?: IPaymentCard;
-  created?: boolean;
+  reservedId?: number;
 }
 
 export type HotelReservationSolid = {

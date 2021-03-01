@@ -54,8 +54,6 @@ export const bookHotel = (data: IHotelRegisterPayload) => {
     .then((response) => response.json());
 };
 
-
-
 export const cancelBookedHotel = (id: string) => {
   return fetch(hotelbBokingUrl + `/${id}`, {
     method: "DELETE",
@@ -65,4 +63,16 @@ export const cancelBookedHotel = (id: string) => {
       console.log(response.status);
       return response.json();
     });
+};
+
+export const updateBookedHotel = (data: IHotelRegisterPayload, id: string) => {
+  return fetch(hotelbBokingUrl + `/${id}`, {
+    method: "PUT",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(data),
+  })
+    .then(handleFetchResponseErrors)
+    .then((response) => response.json());
 };

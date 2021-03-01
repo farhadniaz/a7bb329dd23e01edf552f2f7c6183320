@@ -21,6 +21,7 @@ export const Wrapper = styled.section`
       }
       &:last-child {
         flex: none;
+        text-align: right;
       }
       &__info {
         position: relative;

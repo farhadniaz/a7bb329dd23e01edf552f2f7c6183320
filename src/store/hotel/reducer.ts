@@ -1,5 +1,5 @@
 import actions, { Actions } from "./actions";
-import appInitialState from "./initialState";
+import appInitialState, { defaultState } from "./initialState";
 import { IAction, IHotelState } from "../../types/store";
 import { IHotelReservation } from "../../types/hotel";
 
@@ -23,6 +23,13 @@ export default function reducer(state = appInitialState, action: Action) {
       newState.currentStep = action.payload as number;
       updateLocalStorage(newState);
       return newState;
+
+    case actions.REST_STATE:
+      const rawState = {
+        ...defaultState,
+      };
+      updateLocalStorage(rawState);
+      return rawState;
 
     default:
       return state;

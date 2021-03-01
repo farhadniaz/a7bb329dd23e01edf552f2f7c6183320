@@ -16,10 +16,10 @@ const readStateFromLocalStorage = () => {
   }
   return hotelStateFromLocalStorage;
 };
-
-const state: IHotelState = readStateFromLocalStorage() || {
+export const defaultState = {
   currentStep: 1,
   data: undefined,
 };
+const state: IHotelState = readStateFromLocalStorage() || defaultState;
 
 export default state;

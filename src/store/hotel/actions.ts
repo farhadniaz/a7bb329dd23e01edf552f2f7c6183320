@@ -3,10 +3,11 @@ import { IHotelReservation } from "../../types/hotel";
 
 export const SET_DATA = "SET_DATA";
 export const SET_STEP = "SET_STEP";
-
+export const REST_STATE = "REST_STATE";
 const actions = {
   SET_DATA,
   SET_STEP,
+  REST_STATE,
 };
 
 export type Actions = keyof typeof actions;
@@ -26,6 +27,15 @@ export const useSetHotelStep = () => {
     dispatch({
       type: actions.SET_STEP,
       payload: step,
+    });
+};
+
+export const useResetHotelState = () => {
+  const dispatch = useDispatch();
+  return () =>
+    dispatch({
+      type: actions.REST_STATE,
+      payload: undefined,
     });
 };
 

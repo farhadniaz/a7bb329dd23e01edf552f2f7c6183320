@@ -43,10 +43,6 @@ ${(props: IButton) => {
 `;
 
 
-
-
-
-
 const Steper: FC<IButton> = (props) => {
     const { icon, children, ...restProps } = props;
     return <ButtonWrapper  {...restProps}>

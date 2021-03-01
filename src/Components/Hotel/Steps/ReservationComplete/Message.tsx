@@ -13,14 +13,11 @@ padding: 24px;
 border: 1px solid;
 border-radius: 16px;
 margin-bottom: 34px;
-
 .icon {
     font-size: 50px;
     color: green;
     margin: auto;
 }
-
-
 .commands{
     margin: 24px 0;
     flex-direction: row;
@@ -29,7 +26,6 @@ margin-bottom: 34px;
 .message p {
     margin: 24px 0;
 }
-
 button {
     margin: auto 8px;
     line-height: 1;
@@ -37,10 +33,7 @@ button {
     margin: 12px 0;
 }
 
-    
 @media ${medias.md}{
-
-    
     .commands {
         flex-direction: column;
     }
@@ -48,8 +41,7 @@ button {
      button {
         width: auto;
         margin: 12px;
-    }
-    
+    } 
 }
 `;
 const ReservationCompleteMessage = () => {
@@ -58,8 +50,7 @@ const ReservationCompleteMessage = () => {
     const hotelData = useSelector((state: RootStateOrAny) => state.Hotel.data) as HotelReservationSolid;
 
     const cancel = () => {
-
-        if (hotelData.created && window.confirm("Press a button!")) {
+        if (hotelData.created && window.confirm("Rezervasyon kaydınızı iptal etmek istediğinize emin misiniz?")) {
             cancelBookedHotel(hotelData.hotel_id).then(res => {
                 restHotelState();
             }).catch(err => {
@@ -73,11 +64,8 @@ const ReservationCompleteMessage = () => {
         <span className="icon">
             <FaRegCalendarCheck />
         </span>
-        <h1>
-            Rezervasyon Kaydı alinmistir
-            </h1>
-        <p>
-            Rezervasyon ozetiniz asagidaki gibidir. Rezervasyon kaydinizda degisiklik veya <br />
+        <h1>Rezervasyon Kaydı alinmistir</h1>
+        <p> Rezervasyon ozetiniz asagidaki gibidir. Rezervasyon kaydinizda degisiklik veya <br />
         yeni rezervasyon yapmak icin asagidaki linkleri kullanabilirsiniz.
         </p>
         <div className="commands">

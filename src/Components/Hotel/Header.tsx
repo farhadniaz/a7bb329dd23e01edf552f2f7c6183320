@@ -8,8 +8,6 @@ const Wrapper = styled.header`
 background:${blue};
 color: white;
 margin-bottom: 60px;
-
-
 .header__rest-btn {
     margin: auto;
     margin-right: 0;
@@ -32,7 +30,6 @@ const Header = () => {
                 <Button className="header__rest-btn" onClick={reset}>Yeni Rezervsyon Yap</Button>
             </Col>
         </Container>
-
     </Wrapper>
 }
 

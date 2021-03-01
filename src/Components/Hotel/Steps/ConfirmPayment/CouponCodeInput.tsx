@@ -89,10 +89,7 @@ const CouponCodeInput = () => {
     }
     return <CouponCodeInputWrapper className="coupon-code-input">
         <div className="coupon-code-input__input-wrapper">
-
-
             <input placeholder="Kupon Kodu "
-
                 onChange={(e) => setValue(e.target.value)}
                 value={value}
             />
@@ -111,11 +108,8 @@ const CouponCodeInput = () => {
 
             >Kodu Kullan</Button>
         }
-
     </CouponCodeInputWrapper>
 }
-
-
 
 
 export default CouponCodeInput;

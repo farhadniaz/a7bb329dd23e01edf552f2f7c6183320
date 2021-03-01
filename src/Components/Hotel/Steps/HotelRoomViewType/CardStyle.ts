@@ -24,7 +24,6 @@ const CardStyle = css`
   img {
     margin: 16px auto;
   }
-
   .card__sub-info__value {
     font-size: 20px;
   }

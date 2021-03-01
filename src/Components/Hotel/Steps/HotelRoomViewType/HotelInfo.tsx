@@ -3,14 +3,9 @@ import styled from "styled-components";
 import { IHotelReservation } from "../../../../types/hotel";
 
 const Wrapper = styled.section`
-
-    background: #f2f2f2;
-    padding: 16px;
-    border-radius: 8px;
-
-
-
-
+background: #f2f2f2;
+padding: 16px;
+border-radius: 8px;
 span {
     font-weight: bold;
 }
@@ -22,9 +17,6 @@ span {
         font-size: 14px;
     }
 }
-
- 
-
 `;
 const HotelInfo = () => {
     const hotelData = useSelector((state: RootStateOrAny) => state.Hotel.data) as IHotelReservation;

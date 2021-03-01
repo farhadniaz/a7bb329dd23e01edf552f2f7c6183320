@@ -11,32 +11,27 @@ margin-bottom: 32px;
     position: relative;
     margin-top: 40px;
     padding-top: 48px;
-}
-
-.credit-card-form__title {
-    top: -16px;
-    font-size: 20px;
-    background: white;
-    display: inline-block;
-    position: absolute;
-    font-weight: bold;
-}
-
-
-
-.credit-card-form__item {
-    width: 100%;
-    display: block;
-    margin-bottom: 30px;
-}
-
-.credit-card-form__item__title {
-    display: block;
-    margin-bottom: 8px;
-}
-
-.credit-card-form__item input {
-    width: 100%;
+    &__title {
+        top: -16px;
+        font-size: 20px;
+        background: white;
+        display: inline-block;
+        position: absolute;
+        font-weight: bold;
+    }
+    &__item {
+        width: 100%;
+        display: block;
+        margin-bottom: 30px;
+        &__title {
+            display: block;
+            margin-bottom: 8px;
+        }
+        
+        input {
+            width: 100%;
+        }
+    }
 }
 
 select {
@@ -62,26 +57,19 @@ background: #f3f3f3;
 padding: 16px 12px;
 border-radius: 20px;
 .credit-card-view{
-    &__main-img{
-    width:100%;
+    &__main-img{width:100%;}
+    &__number {
+        display: block;
+        text-align: justify;
+        font-size: 40px;
+        font-weight: bold;
+    }
+    &__sub {
+        display: flex;
+        justify-content: space-between;
+        span {margin: auto;margin-left: 0;}
+    }
 }
-}
-
-
-.credit-card-view__number {
-    display: block;
-    text-align: justify;
-    font-size: 40px;
-    font-weight: bold;
-}
-
-.credit-card-view__sub {
-    display: flex;
-    justify-content: space-between;
-}
-
-.credit-card-view__sub span {margin: auto;margin-left: 0;}
-
 `;
 const CreditCardView = (props: ICreditCardViewProps) => {
     const { expirationMonth, expirationYear, CVV, name, number } = props.data;
@@ -103,13 +91,10 @@ const CreditCard = (props: IProps) => {
     const { form } = props;
     const { errors, control, watch } = form;
     const currentYear = (new Date()).getUTCFullYear();
-
     const alldata = watch();
 
     return <Wrapper className="credit-card">
-
         <CreditCardView data={alldata} />
-
         <div className="credit-card-form">
             <span className="credit-card-form__title">Kart Karti Bilgileri</span>
             <Container fluid>
@@ -124,7 +109,6 @@ const CreditCard = (props: IProps) => {
                         />
                         <FiledValidationError error={errors.name} />
                     </label>
-
                 </Col>
                 <Col span={12}>
                     <label className="credit-card-form__item">
@@ -140,14 +124,12 @@ const CreditCard = (props: IProps) => {
                                     }
                                 }}
                                 type="number"
-
                                 placeholder="Kartin Numarasini Giriniz" />}
                             rules={{ required: true, minLength: 16, maxLength: 16 }}
                             name="number"
                         />
                         <FiledValidationError error={errors.number} />
                     </label>
-
                 </Col>
                 <Col span={8}>
                     <span className="credit-card-form__item__title">Kart Son Kullanma Tarihi</span>
@@ -165,10 +147,8 @@ const CreditCard = (props: IProps) => {
                                 name="expirationMonth"
                             />
                             <FiledValidationError error={errors.expirationMonth} />
-
                         </Col>
                         <Col span={6}>
-
                             <Controller
                                 control={control}
                                 as={<select placeholder="Yil">
@@ -180,17 +160,11 @@ const CreditCard = (props: IProps) => {
                                 rules={{ required: true }}
                                 name="expirationYear"
                             />
-
                             <FiledValidationError error={errors.expirationYear} />
                         </Col>
                     </Container>
-
-
-
-
                 </Col>
                 <Col span={4}>
-
                     <label className="credit-card-form__item">
                         <span className="credit-card-form__item__title">CVV</span>
                         <Controller
@@ -209,19 +183,9 @@ const CreditCard = (props: IProps) => {
                         />
                         <FiledValidationError error={errors.CVV} />
                     </label>
-
-
                 </Col>
             </Container>
         </div>
-
-
-
-
-
-
-
-
     </Wrapper>
 }
 

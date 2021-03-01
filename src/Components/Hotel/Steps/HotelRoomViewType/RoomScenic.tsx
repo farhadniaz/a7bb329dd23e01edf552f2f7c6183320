@@ -20,7 +20,6 @@ const RoomScenic = (props: IProps) => {
                 alt={data.title} />
             <figcaption>{data.title}</figcaption>
         </figure>
-
         <div className="card__sub-info">
             <span>Fiyat Etki Oranı</span>
             <span className="card__sub-info__value">+{data.price_rate}%</span>

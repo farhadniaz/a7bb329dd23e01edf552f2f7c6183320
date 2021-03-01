@@ -3,7 +3,6 @@ import { Roomtype } from "../../../../types/hotel";
 import CardStyle from "./CardStyle";
 const Wrapper = styled.label`
 ${CardStyle}
-
 `;
 
 interface IProps {

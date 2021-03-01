@@ -1,8 +1,7 @@
 import { StepItem, Steps } from "../Common/Steps";
 import { useSelector, RootStateOrAny } from "react-redux";
-
 import styled from "styled-components";
-import { gray, grayAlpha, grayBolka, grayMazo } from "../../styles/colors";
+import { gray } from "../../styles/colors";
 import { FaBed } from 'react-icons/fa';
 import { GoCalendar } from 'react-icons/go';
 import { MdPayment } from 'react-icons/md';

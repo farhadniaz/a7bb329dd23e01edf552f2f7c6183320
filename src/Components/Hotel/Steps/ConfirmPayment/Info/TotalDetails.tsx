@@ -1,8 +1,8 @@
-import { useMemo, ReactNode } from "react";
+import { ReactNode } from "react";
 import { useSelector, RootStateOrAny } from "react-redux";
 import styled from "styled-components";
 import { HotelReservationSolid } from "../../../../../types/hotel";
-import { getDateDiffInDay, calcHotelTotal, formatPrice } from "../../../../../utils";
+import { formatPrice } from "../../../../../utils";
 import useHotelTotalPrice from "../../../../../hooks/useHotelTotalPrice";
 
 interface ITotalDetailsItem {
@@ -18,65 +18,46 @@ const TotalDetailsItem = (props: ITotalDetailsItem) => {
             <span>{subTitle}</span>
         </span>
         <span className="total-details__item__value">{value}</span>
-
     </div>
-
 }
 
 const TotalDetailsWrapper = styled.div`
+padding: 16px;
+background: white;
+border-radius: 8px;
+margin-top: 18px;
 
-
-    padding: 16px;
-    background: white;
-    border-radius: 8px;
-    margin-top: 18px;
-
-
-.total-details__item {
+.total-details{
+    &__item {
     display: flex;
     justify-content: space-between;
     margin-bottom: 8px;
+    &__title {
+        font-weight: bold;
+        span {
+            font-weight: normal;
+            margin-left: 4px;
+        }
+    }    
 }
-
-
-
-.total-details__item__title {
-    font-weight: bold;
-}
-
-.total-details__item__title span {
-    font-weight: normal;
-    margin-left: 4px;
-}
-
-.total-details__total {
+&__total {
     border-top: 1px solid;
     padding: 16px 0;
     text-align: center;
     margin: 16px -16px;
     font-weight: bold;
-}
-
-
-.total-details__total__title {
-    display: block;
-    margin-bottom: 8px;
-    
-}
-
-.total-details__total_price {
-    font-size: 28px;
-}
-
-.total-details__total {
     margin-top: 32px;
-}   
-`
-
-
-
-
-
+    &__title {
+        display: block;
+        margin-bottom: 8px;
+    }
+    
+    &_price {
+        font-size: 28px;
+    }
+}
+} 
+`;
 
 const TotalDetails = () => {
     const hotelData = useSelector((state: RootStateOrAny) => state.Hotel.data) as HotelReservationSolid;

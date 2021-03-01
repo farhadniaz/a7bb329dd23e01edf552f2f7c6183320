@@ -6,11 +6,9 @@ import { AiOutlineDoubleLeft } from 'react-icons/ai';
 
 const Wrapper = styled.section`
 background:${gray};
-
-
-    padding: 24px;
-    border-radius: 12px;
-    display: flex;
+padding: 24px;
+border-radius: 12px;
+display: flex;
 
 .step-bar{
     &__forward{

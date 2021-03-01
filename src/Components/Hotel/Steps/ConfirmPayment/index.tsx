@@ -13,7 +13,6 @@ import { medias } from "../../../Layout";
 const Wrapper = styled.section`
 @media ${medias.md}{
 .info{
-
     margin-left: 24px;
 }
 }
@@ -54,7 +53,6 @@ const ConfirmPayment = () => {
             room_type: hotelData.room_type,
         }
 
-        
         bookHotel(payload).then(data => {
             setHotelReservationData({
                 created: true
@@ -73,16 +71,11 @@ const ConfirmPayment = () => {
             <Col span={12} md={7} sm={12} >
                 <CreditCard form={form} />
             </Col>
-            <Col span={12}
-
-                md={5} sm={12} >
+            <Col span={12} md={5} sm={12} >
                 <Info />
             </Col>
-
         </Container>
-        <Steper onBack={() => {
-            setHotelStep(2)
-        }}
+        <Steper onBack={() => { setHotelStep(2) }}
             forwardText="Ödemeyi Yap ve Bitir"
             onForward={() => {
                 submit();

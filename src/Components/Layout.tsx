@@ -17,16 +17,43 @@ interface IColProps {
     md?: number;
     lg?: number;
     xlg?: number;
+    tb?: number;
 }
 
 
-const ContainerShiled = styled.div`${(props) => {
+export const medias = {
+    sm: `(max-width: 580px)`,
+    tb: `(min-width: 581px)`,
+    md: `(min-width: 768px)`,
+    lg: `(min-width: 991px)`,
+    xlg: `(min-width:1200px)`
+};
+
+
+const ContainerShiled = styled.div`${(props: IContainerProps) => {
+    const { fluid } = props;
     return `
     margin: auto;
     display: flex;
     flex-wrap: wrap;
-    width: ${(props:IContainerProps) => props.fluid ? "100%" : "90%"};
-    @media (min-width:1200px) {
+    width: ${fluid ? "100%" : "90%"};
+   
+    @media ${medias.sm} {
+        max-width:95%;
+    }
+ 
+    @media ${medias.tb}{
+        max-width:95%;
+    }
+
+    @media ${medias.md}{
+        max-width:95%;
+    }
+
+    @media ${medias.lg} {
+        max-width:95%;
+    }
+    @media ${medias.xlg} {
         max-width:1200px;
     }
     `;
@@ -40,7 +67,7 @@ export const Container: FC<IContainerProps> = (props) => {
     const { gutter = defaultGutter, children, style = {}, fluid = false } = props;
     const { Provider } = ContainerContext;
     return <Provider value={gutter} >
-        <ContainerShiled style={style}>
+        <ContainerShiled style={style} fluid={fluid}>
             {children}
         </ContainerShiled>
     </Provider>
@@ -49,7 +76,7 @@ export const Container: FC<IContainerProps> = (props) => {
 
 export const Col = styled.div`${(props: IColProps) => {
     const gutter = useContext(ContainerContext);
-    let { lg, md, sm, span, xlg } = props;
+    let { lg, md, sm, span, xlg, tb } = props;
     const getSpace = (space?: number): string => space ? `width:${(space / gutter) * 100}%;` : '';
 
     const commonWidth = getSpace(span);
@@ -57,6 +84,7 @@ export const Col = styled.div`${(props: IColProps) => {
     const mdWidth = getSpace(md);
     const xlgWidth = getSpace(xlg);
     const smWidth = getSpace(sm);
+    const tbWidth = getSpace(tb);
     // <576px	Small
     // ≥576px	Medium
     // ≥768px	Large
@@ -64,20 +92,31 @@ export const Col = styled.div`${(props: IColProps) => {
     // ≥1200px
     return `
     ${commonWidth}
-    @media (max-width: 576px) {
+  ${smWidth && `
+  @media ${medias.sm} {
         ${smWidth}
     }
- 
-    @media (min-width: 576px) {
-        ${mdWidth}
-    }
+    `}
 
-    @media (min-width:768px) {
+    ${mdWidth && `
+    @media ${medias.md}{
+        ${mdWidth}
+    }`}
+
+    ${tbWidth && `
+    @media ${medias.tb}{
+        ${tbWidth}
+    }`}
+
+    ${lgWidth && `
+    @media ${medias.lg} {
         ${lgWidth}
-    }
-    @media (min-width:1200px) {
+    }`}
+
+    ${xlgWidth && `
+    @media ${medias.xlg} {
         ${xlgWidth}
-    }
+    }`}
     `;
 
 }}`;
